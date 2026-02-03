@@ -1,0 +1,67 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Accueil - Calcul Scientifique{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Application de Calcul Scientifique</h1>
+    <p class="lead text-muted">Outils de simulation et calcul pour la physique et les mathématiques</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up display-1 text-primary mb-3"></i>
+                <h5 class="card-title">Data Science</h5>
+                <p class="card-text">Analyse de données et visualisation</p>
+                <a href="{% url 'myapp:data_science' %}" class="btn btn-primary">Accéder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-lightning-charge display-1 text-warning mb-3"></i>
+                <h5 class="card-title">Énergie</h5>
+                <p class="card-text">Calculs énergétiques</p>
+                <a href="{% url 'myapp:energy' %}" class="btn btn-primary">Accéder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bullseye display-1 text-danger mb-3"></i>
+                <h5 class="card-title">Laser</h5>
+                <p class="card-text">Simulation laser et cavité</p>
+                <a href="{% url 'myapp:laser' %}" class="btn btn-primary">Accéder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-water display-1 text-info mb-3"></i>
+                <h5 class="card-title">Navier-Stokes</h5>
+                <p class="card-text">Équations de la mécanique des fluides</p>
+                <a href="{% url 'myapp:navier_stokes' %}" class="btn btn-primary">Accéder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-calculator display-1 text-success mb-3"></i>
+                <h5 class="card-title">Numérisation</h5>
+                <p class="card-text">Méthodes numériques avancées</p>
+                <a href="{% url 'myapp:numerisation' %}" class="btn btn-primary">Accéder</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

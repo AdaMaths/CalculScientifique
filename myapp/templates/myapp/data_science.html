@@ -1,0 +1,20 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Data Science{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Data Science</h5>
+    </div>
+    <div class="card-body">
+        <p>Module Data Science en cours de développement</p>
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <a href="{% url 'myapp:home' %}" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Retour
+    </a>
+</div>
+{% endblock %}
