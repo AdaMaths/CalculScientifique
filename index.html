@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalculLAB — Adama Gueye</title>
+<meta name="description" content="Laboratoire de calcul scientifique : automatique, data science, énergie, laser, méthodes numériques.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">CL</span> CalculLAB</div>
+    <div class="brand-sub">Physique Numérique</div>
+
+    <div class="nav-group-title">Accueil</div>
+    <div class="nav-item active" data-target="accueil"><span class="nav-icon">◆</span> Vue d'ensemble</div>
+
+    <div class="nav-group-title">Outils métier</div>
+    <div class="nav-item" data-target="automatique"><span class="nav-icon">⌁</span> Automatique</div>
+    <div class="nav-item" data-target="data-science"><span class="nav-icon">▤</span> Data Science</div>
+    <div class="nav-item" data-target="energie"><span class="nav-icon">⚡</span> Gestion énergétique</div>
+    <div class="nav-item" data-target="laser"><span class="nav-icon">✺</span> Laser</div>
+    <div class="nav-item" data-target="navier-stokes"><span class="nav-icon">≈</span> Navier–Stokes</div>
+    <div class="nav-item" data-target="signal"><span class="nav-icon">∿</span> Signal / Fourier</div>
+
+    <div class="nav-group-title">Méthodes numériques</div>
+    <div class="nav-item" data-target="equ-diff"><span class="nav-icon">∫</span> Équations différentielles</div>
+    <div class="nav-item" data-target="interpolation"><span class="nav-icon">×</span> Interpolation</div>
+    <div class="nav-item" data-target="optimisation"><span class="nav-icon">▲</span> Optimisation</div>
+
+    <div class="sidebar-footer">
+      Mon contact : +221772311101<br>
+      mail : adama.gueye.3304@gmail.com<br>
+      © <span id="year"></span> - Adama Gueye - Tous droits réservés
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- ---------- ACCUEIL ---------- -->
+    <section class="section active" id="sec-accueil">
+      <div class="hero">
+        <div class="hero-eyebrow">Laboratoire de calcul scientifique</div>
+        <h1>Résoudre, visualiser, comprendre.</h1>
+        <p>CalculLAB regroupe des outils pédagogiques et d'ingénierie pour l'automatique, l'analyse de données, l'énergie, l'optique laser et les méthodes numériques — le tout dans votre navigateur, sans serveur à maintenir.</p>
+        <div class="scope-wrap">
+          <svg viewBox="0 0 900 110" preserveAspectRatio="none">
+            <path class="trace" d="M0,55 C40,55 60,10 90,10 C120,10 130,100 160,100 C190,100 200,20 230,20 C260,20 275,90 305,90 C335,90 345,30 375,30 C420,30 420,55 460,55 C500,55 510,15 540,15 C570,15 580,95 610,95 C640,95 650,25 680,25 C710,25 720,80 750,80 C780,80 790,40 820,40 C850,40 860,55 900,55"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <div class="module-card" data-target="automatique"><span class="mi">⌁</span><h3>Automatique</h3><p>Analyse de fonctions de transfert : pôles, zéros, stabilité, Bode, réponse indicielle.</p></div>
+        <div class="module-card" data-target="data-science"><span class="mi">▤</span><h3>Data Science</h3><p>Import CSV, statistiques descriptives et visualisation rapide.</p></div>
+        <div class="module-card" data-target="energie"><span class="mi">⚡</span><h3>Gestion énergétique</h3><p>Suivi de consommation et production, courbes temporelles.</p></div>
+        <div class="module-card" data-target="laser"><span class="mi">✺</span><h3>Laser</h3><p>Pertes de cavité et profil gaussien d'un faisceau.</p></div>
+        <div class="module-card" data-target="navier-stokes"><span class="mi">≈</span><h3>Navier–Stokes</h3><p>Visualisation pédagogique d'un champ de vitesse 2D.</p></div>
+        <div class="module-card" data-target="signal"><span class="mi">∿</span><h3>Signal / Fourier</h3><p>Décomposition en série de Fourier (calcul numérique).</p></div>
+        <div class="module-card" data-target="equ-diff"><span class="mi">∫</span><h3>Équations différentielles</h3><p>Euler, Heun, RK2/RK4, Crank-Nicolson.</p></div>
+        <div class="module-card" data-target="interpolation"><span class="mi">×</span><h3>Interpolation</h3><p>Lagrange et Newton, avec tracé du polynôme.</p></div>
+        <div class="module-card" data-target="optimisation"><span class="mi">▲</span><h3>Optimisation</h3><p>Programmation linéaire : variables, contraintes, dualité.</p></div>
+      </div>
+    </section>
+
+    <!-- ---------- AUTOMATIQUE ---------- -->
+    <section class="section" id="sec-automatique">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Analyse de fonction de transfert</h2>
+        <p class="page-desc">Entrez le numérateur et le dénominateur (puissances décroissantes de s) pour obtenir pôles, zéros, stabilité, réponse indicielle et diagramme de Bode.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Paramètres</h4>
+          <div class="field"><label>Numérateur (séparé par des virgules)</label><input type="text" id="at-num" value="1"></div>
+          <div class="field"><label>Dénominateur (séparé par des virgules)</label><input type="text" id="at-den" value="1, 3, 2"></div>
+          <div class="btn-row">
+            <button id="at-run">Analyser</button>
+            <button class="secondary" id="at-reset">Réinitialiser</button>
+          </div>
+          <h4 style="margin-top:22px;">Résultats</h4>
+          <div class="result-block" id="at-result">En attente d'analyse…</div>
+        </div>
+        <div class="panel">
+          <h4>Réponse indicielle</h4>
+          <div class="chart-wrap"><canvas id="at-step-chart" height="180"></canvas></div>
+          <h4 style="margin-top:18px;">Diagramme de Bode</h4>
+          <div class="chart-wrap"><canvas id="at-bode-mag-chart" height="150"></canvas></div>
+          <div class="chart-wrap" style="margin-top:10px;"><canvas id="at-bode-phase-chart" height="150"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- DATA SCIENCE ---------- -->
+    <section class="section" id="sec-data-science">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Outils Data Science</h2>
+        <p class="page-desc">Explorateur CSV générique, et un TP complet de Machine Learning (régression) sur le jeu de données Advertising.</p>
+      </div>
+
+      <div class="btn-row" style="margin-bottom:18px;">
+        <button class="ds-tab-btn active" data-tab="explorer">📊 Explorateur CSV</button>
+        <button class="secondary ds-tab-btn" data-tab="ml-tp">🧪 TP Régression — Advertising</button>
+      </div>
+
+      <!-- ===== Sous-onglet : Explorateur CSV générique ===== -->
+      <div class="ds-tab-panel" id="ds-tab-explorer">
+        <div class="workspace">
+          <div class="panel">
+            <h4>Données</h4>
+            <div class="field"><label>Fichier CSV</label><input type="file" id="ds-file" accept=".csv"></div>
+            <div class="btn-row">
+              <button id="ds-example">Charger un exemple</button>
+              <button class="secondary" id="ds-plot">Tracer un graphique</button>
+            </div>
+            <h4 style="margin-top:22px;">Statistiques</h4>
+            <div class="result-block" id="ds-stats">Aucune donnée chargée.</div>
+          </div>
+          <div class="panel">
+            <h4>Aperçu du tableau</h4>
+            <div class="table-wrap"><table id="ds-table"><thead></thead><tbody></tbody></table></div>
+            <h4 style="margin-top:18px;">Graphique</h4>
+            <div class="chart-wrap"><canvas id="ds-chart" height="180"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Sous-onglet : TP ML Régression (Advertising.csv) ===== -->
+      <div class="ds-tab-panel" id="ds-tab-ml-tp" style="display:none;">
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>1 · Jeu de données</h4>
+          <p class="note">
+            <strong>Advertising.csv</strong> — budgets publicitaires (TV, Radio, Journaux) et ventes résultantes. 200 observations.
+            Cible : <strong>Sales</strong>. Variables d'entrée : <strong>TV, Radio, Newspaper</strong>.
+          </p>
+          <div class="table-wrap" style="max-height:220px;"><table id="ml-table"><thead></thead><tbody></tbody></table></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>2 · Statistiques descriptives (df.describe)</h4>
+          <div class="table-wrap"><table id="ml-describe"><thead></thead><tbody></tbody></table></div>
+        </div>
+
+        <div class="workspace" style="margin-bottom:16px;">
+          <div class="panel">
+            <h4>3 · Matrice de corrélation</h4>
+            <div class="table-wrap" id="ml-corr-wrap"><table id="ml-corr"><thead></thead><tbody></tbody></table></div>
+            <p class="note">TV est la variable la plus corrélée avec Sales — la relation Sales–TV est la plus linéaire.</p>
+          </div>
+          <div class="panel">
+            <h4>4 · Sales vs. prédicteurs</h4>
+            <div class="chart-wrap"><canvas id="ml-scatter-tv" height="140"></canvas></div>
+            <div class="chart-wrap" style="margin-top:10px;"><canvas id="ml-scatter-radio" height="140"></canvas></div>
+            <div class="chart-wrap" style="margin-top:10px;"><canvas id="ml-scatter-news" height="140"></canvas></div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>5 · Entraînement des modèles</h4>
+          <div class="field-row">
+            <div class="field"><label>Taille du jeu de test</label>
+              <select id="ml-testsize"><option value="0.2">20%</option><option value="0.25" selected>25%</option><option value="0.3">30%</option></select>
+            </div>
+            <div class="field"><label>Graine aléatoire (random_state)</label><input type="number" id="ml-seed" value="42"></div>
+          </div>
+          <button id="ml-run">Entraîner et évaluer les 3 modèles</button>
+          <div class="note">Régression linéaire multiple (OLS) · Arbre de décision (CART) · Forêt aléatoire (bagging) — implémentés en JavaScript, sans dépendance serveur.</div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>6 · Comparaison des modèles</h4>
+          <div class="table-wrap"><table id="ml-comparison"><thead></thead><tbody></tbody></table></div>
+          <div class="chart-wrap" style="margin-top:14px;"><canvas id="ml-comparison-chart" height="180"></canvas></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>7 · Valeurs réelles vs. prédites</h4>
+          <div class="workspace">
+            <div class="chart-wrap"><canvas id="ml-avp-lr" height="220"></canvas></div>
+            <div class="chart-wrap"><canvas id="ml-avp-dt" height="220"></canvas></div>
+          </div>
+          <div class="chart-wrap" style="margin-top:12px; max-width:520px;"><canvas id="ml-avp-rf" height="220"></canvas></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>8 · Conclusion</h4>
+          <div class="result-block" id="ml-conclusion">Lancez l'entraînement pour voir la conclusion.</div>
+        </div>
+
+        <div class="panel">
+          <h4>9 · Prédire de nouvelles ventes</h4>
+          <p class="note">Utilise le modèle <strong>Random Forest</strong> entraîné (comme le modèle sauvegardé via pickle dans le TP original).</p>
+          <div class="field-row">
+            <div class="field"><label>Budget TV</label><input type="number" id="ml-pred-tv" value="150"></div>
+            <div class="field"><label>Budget Radio</label><input type="number" id="ml-pred-radio" value="25"></div>
+            <div class="field"><label>Budget Newspaper</label><input type="number" id="ml-pred-news" value="30"></div>
+          </div>
+          <button id="ml-predict">Prédire les ventes</button>
+          <div class="result-block" id="ml-pred-result" style="margin-top:12px;">Entraînez d'abord les modèles.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------- ENERGIE ---------- -->
+    <section class="section" id="sec-energie">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Gestion énergétique moderne</h2>
+        <p class="page-desc">Explorateur CSV générique, et un TP complet de prévision énergétique sur les données réelles de la centrale PV.</p>
+      </div>
+
+      <div class="btn-row" style="margin-bottom:18px;">
+        <button class="en-tab-btn active" data-tab="explorer">📈 Explorateur CSV</button>
+        <button class="secondary en-tab-btn" data-tab="ml-tp">🔆 Prévision — Centrale PV</button>
+      </div>
+
+      <!-- ===== Sous-onglet : Explorateur CSV générique ===== -->
+      <div class="en-tab-panel" id="en-tab-explorer">
+        <div class="workspace">
+          <div class="panel">
+            <h4>Données</h4>
+            <div class="field"><label>Fichier CSV</label><input type="file" id="en-file" accept=".csv"></div>
+            <div class="btn-row">
+              <button id="en-example">Charger un exemple</button>
+              <button class="secondary" id="en-plot">Tracer la consommation</button>
+            </div>
+            <h4 style="margin-top:22px;">Statistiques</h4>
+            <div class="result-block" id="en-stats">Aucune donnée chargée.</div>
+          </div>
+          <div class="panel">
+            <h4>Aperçu du tableau</h4>
+            <div class="table-wrap"><table id="en-table"><thead></thead><tbody></tbody></table></div>
+            <h4 style="margin-top:18px;">Consommation énergétique</h4>
+            <div class="chart-wrap"><canvas id="en-chart" height="180"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Sous-onglet : Prévision énergétique (Energie_Gap_Centrale.xlsx) ===== -->
+      <div class="en-tab-panel" id="en-tab-ml-tp" style="display:none;">
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>1 · Jeu de données réel</h4>
+          <p class="note">
+            <strong>Energie_Gap_Centrale.xlsx</strong> — relevés d'une centrale photovoltaïque (pas de temps ~10 min).
+            <strong>10 368</strong> mesures nettoyées (valeurs manquantes de la cible retirées, heure convertie en minutes).<br>
+            Cible : <strong>Ch7 — Puissance PV</strong>. Entrées : <strong>Heure, Ch1 (Rayonnement), Ch2 (Temp. cellule PV), Ch3 (Temp. générateur PV), Ch4 (Temp. batterie), Ch5 (Temp. ambiante), Ch6 (Consommation onduleur)</strong>.
+          </p>
+          <div class="table-wrap" style="max-height:220px;"><table id="en-ml-table"><thead></thead><tbody></tbody></table></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>2 · Statistiques descriptives</h4>
+          <div class="table-wrap"><table id="en-ml-describe"><thead></thead><tbody></tbody></table></div>
+        </div>
+
+        <div class="workspace" style="margin-bottom:16px;">
+          <div class="panel">
+            <h4>3 · Matrice de corrélation</h4>
+            <div class="table-wrap" id="en-ml-corr-wrap"><table id="en-ml-corr"><thead></thead><tbody></tbody></table></div>
+            <p class="note">Ch1 (rayonnement) et Ch2 (température de cellule PV) sont, dans les faits, les variables les plus corrélées avec la puissance PV produite — la production suit de très près l'ensoleillement.</p>
+          </div>
+          <div class="panel">
+            <h4>4 · Puissance PV vs. rayonnement</h4>
+            <div class="chart-wrap"><canvas id="en-ml-scatter-ch1" height="200"></canvas></div>
+            <div class="chart-wrap" style="margin-top:10px;"><canvas id="en-ml-scatter-heure" height="200"></canvas></div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>5 · Entraînement des modèles</h4>
+          <div class="field-row">
+            <div class="field"><label>Taille du jeu de test</label>
+              <select id="en-ml-testsize"><option value="0.15">15%</option><option value="0.2" selected>20%</option><option value="0.25">25%</option></select>
+            </div>
+            <div class="field"><label>Graine aléatoire (random_state)</label><input type="number" id="en-ml-seed" value="42"></div>
+          </div>
+          <div class="field">
+            <label>Taille max. de l'échantillon d'entraînement (pour la rapidité dans le navigateur)</label>
+            <input type="number" id="en-ml-samplecap" value="2500" min="200" max="8300" step="100">
+          </div>
+          <button id="en-ml-run">Entraîner et évaluer les 4 modèles</button>
+          <div class="note" id="en-ml-status">Régression linéaire (OLS) · Arbre de décision (CART) · Random Forest (bagging) · Gradient Boosting (approximation de XGBoost) — implémentés en JavaScript. L'entraînement peut prendre quelques secondes.</div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>6 · Comparaison des modèles</h4>
+          <div class="table-wrap"><table id="en-ml-comparison"><thead></thead><tbody></tbody></table></div>
+          <div class="chart-wrap" style="margin-top:14px;"><canvas id="en-ml-comparison-chart" height="180"></canvas></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>7 · Valeurs réelles vs. prédites (Puissance PV)</h4>
+          <div class="workspace">
+            <div class="chart-wrap"><canvas id="en-ml-avp-lr" height="220"></canvas></div>
+            <div class="chart-wrap"><canvas id="en-ml-avp-dt" height="220"></canvas></div>
+          </div>
+          <div class="workspace" style="margin-top:12px;">
+            <div class="chart-wrap"><canvas id="en-ml-avp-rf" height="220"></canvas></div>
+            <div class="chart-wrap"><canvas id="en-ml-avp-gb" height="220"></canvas></div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px;">
+          <h4>8 · Conclusion</h4>
+          <div class="result-block" id="en-ml-conclusion">Lancez l'entraînement pour voir la conclusion.</div>
+        </div>
+
+        <div class="panel">
+          <h4>9 · Prédire la puissance PV</h4>
+          <p class="note">Utilise le meilleur modèle entraîné (le plus haut R²) — équivalent du modèle sauvegardé via joblib dans le notebook.</p>
+          <div class="field-row">
+            <div class="field"><label>Heure (HH:MM)</label><input type="text" id="en-pred-heure" value="12:30"></div>
+            <div class="field"><label>Rayonnement Ch1 (W/m²)</label><input type="number" id="en-pred-ch1" value="600"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Temp. cellule PV Ch2 (°C)</label><input type="number" id="en-pred-ch2" value="45"></div>
+            <div class="field"><label>Temp. générateur PV Ch3 (°C)</label><input type="number" id="en-pred-ch3" value="42"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Temp. batterie Ch4 (°C)</label><input type="number" id="en-pred-ch4" value="38"></div>
+            <div class="field"><label>Temp. ambiante Ch5 (°C)</label><input type="number" id="en-pred-ch5" value="32"></div>
+          </div>
+          <div class="field"><label>Consommation onduleur Ch6 (W)</label><input type="number" id="en-pred-ch6" value="1500"></div>
+          <button id="en-ml-predict">Prédire la puissance PV</button>
+          <div class="result-block" id="en-ml-pred-result" style="margin-top:12px;">Entraînez d'abord les modèles.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------- LASER ---------- -->
+    <section class="section" id="sec-laser">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Applications pédagogiques laser</h2>
+        <p class="page-desc">Pertes par cavité et profil gaussien d'intensité d'un faisceau laser.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Pertes par cavité</h4>
+          <div class="field-row">
+            <div class="field"><label>R₁ (réflexion M1)</label><input type="number" id="ls-r1" value="0.99" step="0.0001" min="0.9" max="0.9999"></div>
+            <div class="field"><label>R₂ (réflexion M2)</label><input type="number" id="ls-r2" value="0.99" step="0.0001" min="0.9" max="0.9999"></div>
+          </div>
+          <div class="field"><label>Pertes internes (fraction, par passage)</label><input type="number" id="ls-int" value="0.005" step="0.0001" min="0" max="0.1"></div>
+          <button id="ls-calc">Calculer les pertes</button>
+          <div class="result-block" id="ls-result" style="margin-top:12px;">En attente…</div>
+
+          <h4 style="margin-top:26px;">Profil gaussien du faisceau</h4>
+          <div class="field-row">
+            <div class="field"><label>λ (nm)</label><input type="number" id="ls-lambda" value="532"></div>
+            <div class="field"><label>w₀ (μm)</label><input type="number" id="ls-w0" value="50"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>z (mm)</label><input type="number" id="ls-z" value="0"></div>
+            <div class="field"><label>Puissance (mW)</label><input type="number" id="ls-power" value="10"></div>
+          </div>
+          <button id="ls-gauss">Afficher le profil</button>
+          <div class="result-block" id="ls-gauss-result" style="margin-top:12px;">En attente…</div>
+        </div>
+        <div class="panel">
+          <h4>Profil d'intensité I(x)</h4>
+          <div class="chart-wrap"><canvas id="ls-chart" height="260"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- NAVIER-STOKES ---------- -->
+    <section class="section" id="sec-navier-stokes">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Navier–Stokes 2D (démonstration pédagogique)</h2>
+        <p class="page-desc">Visualisation simplifiée d'un champ de vitesse initial (tourbillon central) sur une grille 2D. Modèle pédagogique — pas un solveur CFD complet.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Paramètres</h4>
+          <div class="field"><label>Viscosité (ν)</label><input type="number" id="ns-nu" value="0.1" step="0.01"></div>
+          <div class="field"><label>Pas de temps (dt)</label><input type="number" id="ns-dt" value="0.01" step="0.001"></div>
+          <div class="field"><label>Taille de grille (N × N)</label><input type="number" id="ns-n" value="16" step="1" min="4" max="32"></div>
+          <button id="ns-run">Lancer la simulation</button>
+          <div class="note">Le solveur Navier–Stokes complet n'est pas implémenté ici (comme dans la version d'origine) : il s'agit d'un champ de vitesse initial visualisé sous forme de quiver plot.</div>
+        </div>
+        <div class="panel">
+          <h4>Champ de vitesse</h4>
+          <div class="chart-wrap"><canvas id="ns-canvas" width="600" height="500"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SIGNAL / FOURIER ---------- -->
+    <section class="section" id="sec-signal">
+      <div class="page-header">
+        <div class="page-eyebrow">Outil métier</div>
+        <h2 class="page-title">Analyseur de séries de Fourier</h2>
+        <p class="page-desc">Coefficients calculés par intégration numérique (méthode de Simpson) sur [-L, L].</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Paramètres</h4>
+          <div class="field"><label>Fonction f(x)</label><input type="text" id="sg-func" value="x^2 + sin(x)"></div>
+          <div class="field"><label>Demi-période L</label><input type="text" id="sg-L" value="pi"></div>
+          <div class="field"><label>Nombre de termes N</label><input type="number" id="sg-N" value="5" min="1" max="30"></div>
+          <button id="sg-run">Calculer la série</button>
+          <h4 style="margin-top:22px;">Coefficients</h4>
+          <div class="result-block" id="sg-result">En attente…</div>
+        </div>
+        <div class="panel">
+          <h4>Fonction vs. approximation</h4>
+          <div class="chart-wrap"><canvas id="sg-chart" height="220"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- EQU DIFF ---------- -->
+    <section class="section" id="sec-equ-diff">
+      <div class="page-header">
+        <div class="page-eyebrow">Méthode numérique</div>
+        <h2 class="page-title">Équations différentielles — méthodes numériques</h2>
+        <p class="page-desc">Résolution de dy/dt = f(y, t) par différentes méthodes d'intégration numérique.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Paramètres</h4>
+          <div class="field"><label>Équation dy/dt = f(y, t)</label><input type="text" id="ed-eqn" value="y - t"></div>
+          <div class="field"><label>Condition initiale y(t₀)</label><input type="text" id="ed-y0" value="1.0"></div>
+          <div class="field-row">
+            <div class="field"><label>t₀</label><input type="text" id="ed-t0" value="0"></div>
+            <div class="field"><label>t₁</label><input type="text" id="ed-t1" value="10"></div>
+          </div>
+          <div class="field"><label>Nombre de points</label><input type="number" id="ed-n" value="100" min="2" max="2000"></div>
+          <div class="field">
+            <label>Méthode numérique</label>
+            <select id="ed-method">
+              <option>Euler explicite</option>
+              <option>Euler implicite</option>
+              <option>Heun</option>
+              <option>RK2</option>
+              <option selected>RK4</option>
+              <option>Crank-Nicolson</option>
+            </select>
+          </div>
+          <button id="ed-run">Résoudre et tracer</button>
+          <h4 style="margin-top:22px;">Aperçu numérique</h4>
+          <div class="result-block" id="ed-result">En attente…</div>
+        </div>
+        <div class="panel">
+          <h4>Solution y(t)</h4>
+          <div class="chart-wrap"><canvas id="ed-chart" height="260"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- INTERPOLATION ---------- -->
+    <section class="section" id="sec-interpolation">
+      <div class="page-header">
+        <div class="page-eyebrow">Méthode numérique</div>
+        <h2 class="page-title">Interpolation — Lagrange et Newton</h2>
+        <p class="page-desc">Construisez un polynôme d'interpolation passant par vos points, puis évaluez-le en un point donné.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Points</h4>
+          <div class="field"><label>Valeurs de x (séparées par des virgules)</label><input type="text" id="ip-x" value="1, 2, 3, 4"></div>
+          <div class="field"><label>Valeurs de y</label><input type="text" id="ip-y" value="1, 4, 9, 16"></div>
+          <div class="field"><label>x à interpoler</label><input type="text" id="ip-xi" value="2.5"></div>
+          <div class="field">
+            <label>Méthode</label>
+            <select id="ip-method"><option>Lagrange</option><option>Newton</option></select>
+          </div>
+          <button id="ip-run">Interpoler</button>
+          <h4 style="margin-top:22px;">Résultat</h4>
+          <div class="result-block" id="ip-result">En attente…</div>
+        </div>
+        <div class="panel">
+          <h4>Polynôme d'interpolation</h4>
+          <div class="chart-wrap"><canvas id="ip-chart" height="260"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- OPTIMISATION ---------- -->
+    <section class="section" id="sec-optimisation">
+      <div class="page-header">
+        <div class="page-eyebrow">Méthode numérique</div>
+        <h2 class="page-title">Optimisation industrielle — programmation linéaire</h2>
+        <p class="page-desc">Définissez vos variables de décision, vos contraintes et votre objectif, puis résolvez le problème.</p>
+      </div>
+      <div class="workspace">
+        <div class="panel">
+          <h4>Variables de décision</h4>
+          <div class="field"><label>Nombre de variables</label><input type="number" id="op-varcount" value="2" min="1" max="10"></div>
+          <button class="secondary" id="op-genvars">Générer la table</button>
+          <div id="op-vars" style="margin-top:12px;"></div>
+
+          <h4 style="margin-top:22px;">Contraintes</h4>
+          <div id="op-constraints"></div>
+          <button class="ghost" id="op-addconstraint">+ Ajouter une contrainte</button>
+
+          <h4 style="margin-top:22px;">Objectif</h4>
+          <div class="field">
+            <select id="op-objective"><option>Maximiser</option><option>Minimiser</option></select>
+          </div>
+          <button id="op-solve">Résoudre le problème</button>
+        </div>
+        <div class="panel">
+          <h4>Résultats</h4>
+          <div class="result-block" id="op-result">Configurez le problème puis lancez la résolution.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">CalculLAB — Adama Gueye · Maintenancier des systèmes</footer>
+  </main>
+</div>
+
+<!-- ============ Dependencies (CDN) ============ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.3/lib/browser/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/javascript-lp-solver@0.4.24/prod/solver.js"></script>
+
+<!-- ============ App ============ -->
+<script src="js/supabase-client.js"></script>
+<script src="js/app.js"></script>
+<script src="js/modules/automatique.js"></script>
+<script src="js/modules/datascience.js"></script>
+<script src="js/modules/dataset-advertising.js"></script>
+<script src="js/modules/ml-core.js"></script>
+<script src="js/modules/ml-ui.js"></script>
+<script src="js/modules/energie.js"></script>
+<script src="js/modules/dataset-energie.js"></script>
+<script src="js/modules/energie-ml-ui.js"></script>
+<script src="js/modules/laser.js"></script>
+<script src="js/modules/navierstokes.js"></script>
+<script src="js/modules/signal.js"></script>
+<script src="js/modules/equdiff.js"></script>
+<script src="js/modules/interpolation.js"></script>
+<script src="js/modules/optimisation.js"></script>
+</body>
+</html>
