@@ -122,27 +122,35 @@
     });
   }
 
+  function clampSampleCap(value){
+    const parsed = Number.parseInt(value, 10);
+    if (!Number.isFinite(parsed)) return 1200;
+    return Math.min(3000, Math.max(300, parsed));
+  }
+
   function trainAndEvaluate(){
     const statusEl = document.getElementById('en-ml-status');
     const runBtn = document.getElementById('en-ml-run');
     runBtn.disabled = true;
-    statusEl.innerHTML = '<span class="v">Entraînement en cours… (Random Forest et Gradient Boosting peuvent prendre plusieurs secondes)</span>';
+    statusEl.innerHTML = '<span class="v">Préparation du jeu d’entraînement…</span>';
 
-    // defer so the UI can repaint the "training…" message before the heavy synchronous work
+    // defer so the UI can repaint before the heavy synchronous work starts
     setTimeout(()=>{
       try{
         const testSize = parseFloat(document.getElementById('en-ml-testsize').value);
         const seed = parseInt(document.getElementById('en-ml-seed').value) || 42;
-        const cap = Math.max(200, Math.min(8300, parseInt(document.getElementById('en-ml-samplecap').value) || 2500));
+        const cap = clampSampleCap(document.getElementById('en-ml-samplecap').value);
 
         const { train: fullTrain, test } = trainTestSplit(ENERGIE_DATA, testSize, seed);
         const train = fullTrain.slice(0, cap);
         const yTest = test.map(r=>r[TARGET]);
 
+        statusEl.innerHTML = '<span class="v">Entraînement des modèles…</span>';
+
         const lr = fitLinearRegression(train, FEATURES, TARGET);
-        const dt = fitDecisionTree(train, FEATURES, TARGET, 7, 10);
-        const rf = fitRandomForest(train, FEATURES, TARGET, 12, 6, 10, 7);
-        const gb = fitGradientBoosting(train, FEATURES, TARGET, 25, 3, 0.15, 10);
+        const dt = fitDecisionTree(train, FEATURES, TARGET, 6, 12);
+        const rf = fitRandomForest(train, FEATURES, TARGET, 8, 5, 12, 7);
+        const gb = fitGradientBoosting(train, FEATURES, TARGET, 12, 3, 0.15, 12);
 
         const yPredLR = test.map(r=>lr.predict(r));
         const yPredDT = test.map(r=>dt.predict(r));
