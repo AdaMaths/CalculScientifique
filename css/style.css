@@ -25,6 +25,12 @@
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
 
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body{
   margin:0;
   background:
@@ -34,7 +40,6 @@ body{
   color: var(--text);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 h1,h2,h3,.brand,.nav-group-title{ font-family: 'Space Grotesk', sans-serif; }
@@ -172,6 +177,11 @@ a{ color: var(--accent); }
 .workspace{ display:grid; grid-template-columns: 340px 1fr; gap:18px; align-items:start; }
 @media (max-width: 980px){ .workspace{ grid-template-columns: 1fr; } }
 @media (max-width: 760px){
+  html, body, .shell, .main, .section, .workspace, .panel, .table-wrap, .chart-wrap, .module-grid, .field-row, .btn-row {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .shell{ display:block; }
   .sidebar{
     width:100%;
@@ -193,8 +203,18 @@ a{ color: var(--accent); }
   .chart-wrap{ padding:8px; }
   .table-wrap{ overflow-x:auto; }
   .nav-item{ font-size:12.5px; }
+  .result-block, .note, .page-desc, .hero p, .sidebar-footer{ overflow-wrap:anywhere; word-break:break-word; }
 }
 
+@media (max-width: 520px){
+  .hero h1{ font-size: 24px; max-width:none; }
+  .hero p, .page-desc, .note{ font-size: 12.5px; }
+  .brand{ font-size: 17px; }
+  .nav-group-title{ letter-spacing:1px; }
+  .nav-item{ padding:8px 9px; }
+  .main{ padding-left: 12px; padding-right: 12px; }
+  .panel, .hero{ border-radius: 8px; }
+}
 .panel{
   border:1px solid var(--border);
   background: var(--surface);
@@ -259,7 +279,7 @@ button:focus-visible, .nav-item:focus-visible, input:focus-visible{ outline: 2px
 .result-block .warn{ color: var(--danger); }
 
 .chart-wrap{ margin-top:14px; background:#0B111E; border:1px solid var(--border); border-radius:8px; padding:12px; }
-canvas{ max-width:100%; }
+canvas{ display:block; width:100% !important; max-width:100%; height:auto !important; }
 
 table{ width:100%; border-collapse: collapse; font-size:12px; }
 th, td{ border:1px solid var(--border); padding:6px 8px; text-align:left; }
