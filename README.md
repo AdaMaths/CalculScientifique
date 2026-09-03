@@ -2,7 +2,9 @@
 
 Laboratoire de calcul scientifique — résolution et visualisation de problèmes d'ingénierie et de sciences, directement dans le navigateur.
 
-**Démo une fois déployé :** `https://<ton-pseudo-github>.github.io/<nom-du-repo>/`
+Le site est conçu pour être utilisé sur ordinateur et sur mobile, avec un layout responsive adapté aux écrans plus petits.
+
+**Démo publique :** `https://adamaths.github.io/CalculScientifique/`
 
 ## Stack
 
@@ -18,6 +20,8 @@ Ce projet est un **site statique** : HTML + CSS + JavaScript, sans build, sans s
 Il n'y a plus de dépendance à Streamlit, PyQt5 ou Django : ces briques ont été retirées car elles nécessitaient un serveur Python et empêchaient un déploiement simple sur GitHub Pages.
 
 ## Fonctionnalités
+
+Le projet propose une interface de type dashboard scientifique avec navigation latérale, sections modulaires et graphiques interactifs. La compatibilité mobile a été renforcée pour éviter les débordements et garder une lecture correcte sur petit écran.
 
 **Outils métier**
 - Automatique : pôles, zéros, stabilité, réponse indicielle, diagramme de Bode
@@ -65,18 +69,17 @@ calculab-web/
 
 ## Déploiement sur GitHub Pages
 
-1. Crée un dépôt sur GitHub (ex. `calculab`) sous le compte **AdaMaths**.
-2. Pousse ce dossier :
+1. Vérifie que le dépôt est bien nommé `CalculScientifique` sous le compte **AdaMaths**.
+2. Pousse le projet sur GitHub :
    ```bash
-   git init
    git add .
    git commit -m "CalculLAB - site statique"
    git branch -M main
-   git remote add origin https://github.com/AdaMaths/calculab.git
+   git remote add origin https://github.com/AdaMaths/CalculScientifique.git
    git push -u origin main
    ```
 3. Sur GitHub : **Settings → Pages → Source : branche `main`, dossier `/ (root)`** → Enregistrer.
-4. Le site sera accessible sous `https://adamaths.github.io/calculab/` après quelques minutes.
+4. Le site est accessible sous `https://adamaths.github.io/CalculScientifique/` après quelques minutes.
 
 Aucune étape de build n'est nécessaire : `index.html` charge directement les fichiers CSS/JS et les librairies via CDN.
 
@@ -100,6 +103,12 @@ Aucune installation requise : ouvre `index.html` dans un navigateur, ou lance un
 python3 -m http.server 8000
 # puis ouvrir http://localhost:8000
 ```
+
+## Compatibilité et responsive
+
+- La mise en page a été optimisée pour les écrans larges comme les écrans mobiles.
+- Les blocs, tableaux, boutons, graphiques et la sidebar s'adaptent automatiquement à la largeur de l'écran.
+- Les débordements horizontaux ont été corrigés pour éviter les problèmes sur smartphone.
 
 ## Limites connues
 
