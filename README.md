@@ -15,7 +15,7 @@ Ce projet est un **site statique** : HTML + CSS + JavaScript, sans build, sans s
 - **Calcul / parsing d'expressions** : [math.js](https://mathjs.org/) (CDN)
 - **CSV** : [PapaParse](https://www.papaparse.com/) (CDN)
 - **Programmation linéaire** : [javascript-lp-solver](https://github.com/JWally/jsLPSolver) (CDN)
-- **Backend optionnel** : [Supabase](https://supabase.com/) (auth, stockage de résultats, base de données) — désactivé par défaut
+- **Backend optionnel** : [Firebase](https://firebase.google.com/) (auth, stockage de résultats, base de données Firestore) — désactivé par défaut
 
 Il n'y a plus de dépendance à Streamlit, PyQt5 ou Django : ces briques ont été retirées car elles nécessitaient un serveur Python et empêchaient un déploiement simple sur GitHub Pages.
 
@@ -45,7 +45,7 @@ calculab-web/
 │   └── style.css
 ├── js/
 │   ├── app.js               # navigation + helpers partagés (complexes, racines de polynômes, charts)
-│   ├── supabase-client.js   # client Supabase optionnel (désactivé par défaut)
+│   ├── firebase-client.js   # client Firebase optionnel (désactivé par défaut)
 │   └── modules/
 │       ├── automatique.js
 │       ├── datascience.js
@@ -83,17 +83,20 @@ calculab-web/
 
 Aucune étape de build n'est nécessaire : `index.html` charge directement les fichiers CSS/JS et les librairies via CDN.
 
-## Activer Supabase (optionnel)
+## Activer Firebase (optionnel)
 
-Le site fonctionne entièrement sans Supabase. Si tu veux ajouter la sauvegarde de résultats, l'authentification ou une base de données partagée :
+Le site fonctionne entièrement sans backend. Si tu veux ajouter la sauvegarde de résultats, l'authentification ou une base Firestore partagée :
 
-1. Crée un projet sur [supabase.com](https://supabase.com).
-2. Dans `index.html`, ajoute avant `js/app.js` :
+1. Crée un projet sur [Firebase](https://firebase.google.com/).
+2. Active **Authentication** et **Firestore Database** dans la console.
+3. Dans `index.html`, ajoute avant `js/app.js` :
    ```html
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
    ```
-3. Renseigne `SUPABASE_URL` et `SUPABASE_ANON_KEY` dans `js/supabase-client.js` (clé **anon public** uniquement — jamais la clé `service_role`).
-4. Utilise `supabaseClient` dans les modules concernés pour lire/écrire des données.
+4. Renseigne la configuration Firebase dans `js/firebase-client.js`.
+5. Utilise `window.CalculLABFirebase` dans les modules concernés pour lire/écrire des données.
 
 ## Développement local
 
